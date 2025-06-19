@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data
+
 @Entity
 @Table(name = "departement")
 public class Departement {
@@ -32,4 +32,14 @@ public class Departement {
 		// TODO Auto-generated method stub
 		return this.id;
 	}
+	 public void setId(Long id) {
+        this.id = id;
+    }
+    public List<AppUser> getAppUsers() {
+        return appUsers;
+    }
+
+    public void setAppUsers(List<AppUser> appUsers) {
+        this.appUsers = appUsers;
+    }
 }
