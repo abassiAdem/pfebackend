@@ -373,23 +373,31 @@ public class KeycloakService {
              dto.setEmail(user.getEmail());
              dto.setKeycloakId(user.getKeycloakId());
              dto.setIsActive(user.getIsActive());
-             dto.setRole(user.getRole());
-             dto.setDepartement(user.getDepartement().getName());
-             if (user.getRole().isEmpty()) {
-                 dto.setRole("NO_ROLE");
+          
+             if(user.getDepartement()==null) {
+            	 dto.setDepartement("NO_DEPARTEMENT");
+             }else {
+
+                 dto.setDepartement(user.getDepartement().getName()); 
              }
-             if(user.getRole().equals("realisateur")) {
-                 Optional<Realisateur> rerOptional = realisateurRepository.findById(user.getId());
-                 if(rerOptional.isPresent()) {
-                     Realisateur rer = rerOptional.get();
-                     dto.setCompetence(rer.getCompetences());
-                     dto.setMetier(rer.getMetier());
-                 }
-          }
+             if (user.getRole()==null || user.getRole()=="" ) {
+                 dto.setRole("NO_ROLE");
+             }else {
+            	   dto.setRole(user.getRole());
+            	   
+                   if(user.getRole().equals("realisateur")) {
+                       Optional<Realisateur> rerOptional = realisateurRepository.findById(user.getId());
+                       if(rerOptional.isPresent()) {
+                           Realisateur rer = rerOptional.get();
+                           dto.setCompetence(rer.getCompetences());
+                           dto.setMetier(rer.getMetier());
+                       }
+                }
+             }
+
              
              return dto;
          }
-
     
 
     @Transactional
